@@ -1,0 +1,15 @@
+{
+  "name": "@mafirm-monitor/performance",
+  "version": "1.0.0",
+  "description": "页面指标监控",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@mafirm-monitor/types": "workspace:^"
+  }
+}

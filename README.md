@@ -30,3 +30,5 @@
  3. beforeunload
  4. 缓存
 
+
+https://github.com/1Telescope1/monitor-sdk/blob/main/src/performance/xhr.ts
