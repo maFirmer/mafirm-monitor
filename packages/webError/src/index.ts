@@ -2,6 +2,7 @@ import { TraceTypeEnum, TraceKindEnum } from "@mafirm-monitor/types";
 
 // js运行错误
 const jsError = () => {
+  //
   window.onerror = (message, source, line, column, error) => {
     const data = {
       kind: TraceKindEnum.ERROR,
@@ -13,6 +14,7 @@ const jsError = () => {
       error,
       stack: error?.stack,
       pageUrl: window.location.href,
+      startTime: performance.now(),
     };
     console.log(message, source, line, column, error);
   };
@@ -22,14 +24,44 @@ const jsError = () => {
     const data = {
       kind: TraceKindEnum.ERROR,
       type: TraceTypeEnum.PROMISE,
-      message: event.reason,
-      stack: event.reason?.stack,
+      reason: event.reason?.stack,
       pageUrl: window.location.href,
+      startTime: event.timeStamp,
     };
     console.log(event.reason);
   });
 };
 // cors跨域错误
+const corsError = () => {};
 // 资源加载错误
+const jsResourceError = () => {
+  window.addEventListener("error", (event) => {
+    const target = event.target as HTMLElement;
+    if (!target) return;
 
-export const webError = () => {};
+    const url =
+      (target as HTMLScriptElement | HTMLImageElement).src ||
+      (target as HTMLLinkElement).href;
+
+    if (url) {
+      const data = {
+        kind: TraceKindEnum.ERROR,
+        type: TraceTypeEnum.RESOURCE,
+        url,
+        html: target.outerHTML,
+        pageUrl: window.location.href,
+        paths: event.composedPath(), // 替代event.path
+      };
+      // 上报数据
+    }
+  });
+};
+
+const webError = () => {
+  jsError();
+  corsError();
+  jsResourceError();
+};
+
+export default webError;
+export { webError };
