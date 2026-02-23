@@ -11,14 +11,14 @@ export const observeLCP = () => {
     }
     list.getEntries().forEach((entry) => {
       const entryData = entry.toJSON();
-      const data: PaintPageType = {
+      const monitorData: PaintPageType = {
         ...entryData,
         kind: TraceKindEnum.PERFORMANCE,
         type: TraceTypeEnum.LCP,
         timestamp: new Date().getTime(),
         pageUrl: window.location.href,
       };
-      console.log(data);
+      console.log(monitorData);
       // 数据上报
     });
   });

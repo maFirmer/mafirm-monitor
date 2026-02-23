@@ -4,7 +4,7 @@ import { TraceTypeEnum, TraceKindEnum } from "@mafirm-monitor/types";
 const jsError = () => {
   //
   window.onerror = (message, source, line, column, error) => {
-    const data = {
+    const monitorData = {
       kind: TraceKindEnum.ERROR,
       type: TraceTypeEnum.JS,
       message,
@@ -21,7 +21,7 @@ const jsError = () => {
 
   // promise错误
   window.addEventListener("unhandledrejection", (event) => {
-    const data = {
+    const monitorData = {
       kind: TraceKindEnum.ERROR,
       type: TraceTypeEnum.PROMISE,
       reason: event.reason?.stack,
@@ -44,7 +44,7 @@ const jsResourceError = () => {
       (target as HTMLLinkElement).href;
 
     if (url) {
-      const data = {
+      const monitorData = {
         kind: TraceKindEnum.ERROR,
         type: TraceTypeEnum.RESOURCE,
         url,

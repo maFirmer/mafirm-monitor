@@ -5,7 +5,7 @@ export const observePageshow = () => {
     (event) => {
       requestAnimationFrame(() => {
         ["load", "DOMContentLoaded"].forEach((type) => {
-          const data = {
+          const monitorData = {
             kind: TraceKindEnum.PERFORMANCE,
             type: type,
             pageUrl: window.location.href,

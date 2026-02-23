@@ -22,7 +22,7 @@ export const observeResource = () => {
     const entries = list.getEntries();
     entries.forEach((entry, index) => {
       const entryData = entry.toJSON();
-      const data: PerformanceResourceType = {
+      const monitorData: PerformanceResourceType = {
         kind: TraceKindEnum.PERFORMANCE,
         type: entryData.entryType, // 类型
         name: entryData.name, // 资源的名字
@@ -41,11 +41,11 @@ export const observeResource = () => {
         pageUrl: window.location.href, // 页面地址
         timestamp: new Date().getTime(),
       };
-      dataList.push(data);
+      dataList.push(monitorData);
 
       // 加载到最后一项 发送数据
       if (index === entries.length - 1) {
-        const data = {
+        const monitorDataResult = {
           kind: TraceKindEnum.PERFORMANCE,
           type: TraceTypeEnum.RESOURCE,
           data: dataList,

@@ -11,14 +11,14 @@ export const observeFCP = () => {
         // 绘制完成 停止监听
         observer.disconnect();
         const entryData = entry.toJSON();
-        const data: PaintPageType = {
+        const monitorData: PaintPageType = {
           ...entryData,
           kind: TraceKindEnum.PERFORMANCE,
           type: TraceTypeEnum.FCP,
           timestamp: new Date().getTime(),
           pageUrl: window.location.href,
         };
-        console.log(data);
+        console.log(monitorData);
         // 数据上报
       }
     });
