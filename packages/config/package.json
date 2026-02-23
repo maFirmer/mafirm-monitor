@@ -1,8 +1,8 @@
 {
-  "name": "@mafirm-monitor/webError",
+  "name": "@mafirm-monitor/config",
   "version": "1.0.0",
-  "description": "错误监控",
-  "main": "src/index.js",
+  "description": "监控平台配置文件",
+  "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

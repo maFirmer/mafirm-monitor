@@ -17,6 +17,12 @@ importers:
 
   packages/behavior: {}
 
+  packages/config:
+    dependencies:
+      '@mafirm-monitor/types':
+        specifier: workspace:^
+        version: link:../types
+
   packages/errorPool: {}
 
   packages/performance:
@@ -25,7 +31,25 @@ importers:
         specifier: workspace:^
         version: link:../types
 
+  packages/report:
+    dependencies:
+      '@mafirm-monitor/config':
+        specifier: workspace:^
+        version: link:../config
+      '@mafirm-monitor/types':
+        specifier: workspace:^
+        version: link:../types
+      '@mafirm-monitor/utils':
+        specifier: workspace:^
+        version: link:../utils
+
   packages/types: {}
+
+  packages/utils:
+    dependencies:
+      '@mafirm-monitor/types':
+        specifier: workspace:^
+        version: link:../types
 
   packages/webError:
     dependencies:

@@ -1,0 +1,17 @@
+{
+  "name": "@mafirm-monitor/report",
+  "version": "1.0.0",
+  "description": "数据上传",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@mafirm-monitor/config": "workspace:^",
+    "@mafirm-monitor/types": "workspace:^",
+    "@mafirm-monitor/utils": "workspace:^"
+  }
+}
