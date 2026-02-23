@@ -13,8 +13,8 @@ export const observeFCP = () => {
         const entryData = entry.toJSON();
         const data: PaintPageType = {
           ...entryData,
-          kind: TraceKindEnum.performance,
-          type: TraceTypeEnum.fcp,
+          kind: TraceKindEnum.PERFORMANCE,
+          type: TraceTypeEnum.FCP,
           timestamp: new Date().getTime(),
           pageUrl: window.location.href,
         };

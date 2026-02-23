@@ -13,8 +13,8 @@ export const observeLCP = () => {
         const entryData = entry.toJSON();
         const data: PaintPageType = {
           ...entryData,
-          kind: TraceKindEnum.performance,
-          type: TraceTypeEnum.fp,
+          kind: TraceKindEnum.PERFORMANCE,
+          type: TraceTypeEnum.FP,
           timestamp: new Date().getTime(),
           pageUrl: window.location.href,
         };

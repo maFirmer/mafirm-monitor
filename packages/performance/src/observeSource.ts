@@ -23,7 +23,7 @@ export const observeResource = () => {
     entries.forEach((entry, index) => {
       const entryData = entry.toJSON();
       const data: PerformanceResourceType = {
-        kind: TraceKindEnum.performance,
+        kind: TraceKindEnum.PERFORMANCE,
         type: entryData.entryType, // 类型
         name: entryData.name, // 资源的名字
         sourceType: entryData.initiatorType, // 资源类型
@@ -46,8 +46,8 @@ export const observeResource = () => {
       // 加载到最后一项 发送数据
       if (index === entries.length - 1) {
         const data = {
-          kind: TraceKindEnum.performance,
-          type: TraceTypeEnum.resource,
+          kind: TraceKindEnum.PERFORMANCE,
+          type: TraceTypeEnum.RESOURCE,
           data: dataList,
           timestamp: new Date().getTime(),
         };
