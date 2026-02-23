@@ -24,7 +24,7 @@ export const report = (data) => {
   setReportUpload(monitorData);
 };
 
-export const batchReport = (data) => {
+export const batchReportUpload = (data) => {
   addReportCache(data);
   const reportCache = getReportCache();
   const maxReportUploadSize = config.maxReportUploadSize;

@@ -8,5 +8,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@mafirm-monitor/types": "workspace:^",
+    "@mafirm-monitor/utils": "workspace:^"
+  }
 }
