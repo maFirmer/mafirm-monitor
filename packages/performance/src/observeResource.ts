@@ -2,21 +2,22 @@ import {
   TraceTypeEnum,
   TraceKindEnum,
   PerformanceResourceType,
+  SendReportData,
 } from "@mafirm-monitor/types";
 
 // 页面加载完成触发监控
-export const observeDOMLoad = () => {
+export const observeResource = (callback: SendReportData) => {
   if (document.readyState === "complete") {
-    observeResource();
+    handler(callback);
   } else {
     const onload = () => {
-      observeResource();
+      handler(callback);
       window.addEventListener("load", onload, true);
     };
     window.removeEventListener("load", onload, true);
   }
 };
-export const observeResource = () => {
+export const handler = (callback: SendReportData) => {
   const observer = new PerformanceObserver((list) => {
     const dataList: PerformanceResourceType[] = [];
     const entries = list.getEntries();
@@ -52,6 +53,7 @@ export const observeResource = () => {
           timestamp: new Date().getTime(),
         };
         // 上报数据
+        callback(monitorDataResult);
       }
     });
   });

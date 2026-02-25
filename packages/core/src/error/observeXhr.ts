@@ -1,4 +1,8 @@
-import { TraceKindEnum, TraceTypeEnum } from "@mafirm-monitor/types";
+import {
+  TraceKindEnum,
+  TraceTypeEnum,
+  HandlerOptionType,
+} from "@mafirm-monitor/types";
 
 const originalXhrProto = XMLHttpRequest.prototype;
 const originalOpen = originalXhrProto.open;
@@ -11,7 +15,8 @@ interface CustomXMLHttpRequest extends XMLHttpRequest {
   endTime?: number;
   duration?: number;
 }
-function overwriteXhr() {
+function overwriteXhr(handlerOption: HandlerOptionType) {
+  const { callback } = handlerOption;
   // 重写 open 方法
   (originalXhrProto as CustomXMLHttpRequest).open = function (
     method: string,
@@ -48,6 +53,7 @@ function overwriteXhr() {
         status: this.status,
         timestamp: new Date().getTime(),
       };
+      callback(monitorData);
       this.removeEventListener("loaded", onloaded, true);
     };
 
@@ -56,7 +62,12 @@ function overwriteXhr() {
   };
 }
 
-function xhr() {
-  overwriteXhr();
+function handlerXhr() {
+  return {
+    kind: TraceKindEnum.PERFORMANCE,
+    type: TraceTypeEnum.XHR,
+    callback: overwriteXhr,
+  };
 }
-export default xhr;
+
+export { handlerXhr };

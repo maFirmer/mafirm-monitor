@@ -1,5 +1,9 @@
-import { TraceTypeEnum, TraceKindEnum } from "@mafirm-monitor/types";
-export const observePageshow = () => {
+import {
+  TraceTypeEnum,
+  TraceKindEnum,
+  SendReportData,
+} from "@mafirm-monitor/types";
+export const observePageshow = (callback: SendReportData) => {
   window.addEventListener(
     "pageshow",
     (event) => {
@@ -13,6 +17,7 @@ export const observePageshow = () => {
             startTime: performance.now() - event.timeStamp,
           };
           // 上报数据
+          callback(monitorData);
         });
       });
     },

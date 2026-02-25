@@ -3,7 +3,7 @@
  * 优先级：图片上 > sendBeacon > ajax
  */
 
-import config from "@mafirm-monitor/config";
+import { config } from "@mafirm-monitor/config";
 import {
   generateUID,
   hasSendBeacon,
@@ -11,6 +11,7 @@ import {
   addReportCache,
   clearReportCache,
 } from "@mafirm-monitor/utils";
+import { SendReportData } from "@mafirm-monitor/types";
 
 export const report = (data) => {
   if (!config.url) {
@@ -24,7 +25,7 @@ export const report = (data) => {
   setReportUpload(monitorData);
 };
 
-export const batchReportUpload = (data) => {
+export const sendReportData: SendReportData = (data) => {
   addReportCache(data);
   const reportCache = getReportCache();
   const maxReportUploadSize = config.maxReportUploadSize;

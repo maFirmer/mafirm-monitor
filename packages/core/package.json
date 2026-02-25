@@ -1,7 +1,7 @@
 {
-  "name": "@mafirm-monitor/report",
+  "name": "@mafirm-monitor/core",
   "version": "1.0.0",
-  "description": "数据上传",
+  "description": "监控系统入口核心包",
   "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

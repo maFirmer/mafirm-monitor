@@ -1,6 +1,11 @@
 import { generateUID } from "@mafirm-monitor/utils";
-import { TraceKindEnum, TraceTypeEnum } from "@mafirm-monitor/types";
-export function pv() {
+import {
+  HandlerOptionType,
+  TraceKindEnum,
+  TraceTypeEnum,
+} from "@mafirm-monitor/types";
+export function pv(handlerOption: HandlerOptionType) {
+  const { callback } = handlerOption;
   const monitorData = {
     kind: TraceKindEnum.BEHAVIOR,
     type: TraceTypeEnum.PV,
@@ -9,8 +14,10 @@ export function pv() {
     refferer: document.referrer,
     uuid: generateUID(),
   };
+  callback(monitorData);
 }
-export function behaviorClick() {
+export function click(handlerOption: HandlerOptionType) {
+  const { callback } = handlerOption;
   ["mousedown", "touchStart"].forEach((eventType) => {
     window.addEventListener(eventType, function (e: Event) {
       const target = e.target;
@@ -29,11 +36,13 @@ export function behaviorClick() {
           height: element.offsetHeight,
           path: e.composedPath(),
         };
+        callback(monitorData);
       }
     });
   });
 }
-export function routerChange() {
+export function routerChange(handlerOptionvv: HandlerOptionType) {
+  const { callback } = handlerOptionvv;
   let oldUrl = ""; // hash
   let from = ""; // history
 
@@ -51,6 +60,7 @@ export function routerChange() {
         uuid: generateUID(),
       };
       // 上报数据
+      callback(monitorData);
       oldUrl = newUrl;
     },
     true,
@@ -70,14 +80,32 @@ export function routerChange() {
         uuid: generateUID(),
       };
       // 上报数据
+      callback(monitorData);
       from = to;
     },
     true,
   );
 }
 
-export default function behavior() {
-  pv();
-  behaviorClick();
-  routerChange();
+export function handlerPv() {
+  return {
+    kind: TraceKindEnum.BEHAVIOR,
+    type: TraceTypeEnum.PV,
+    callback: handlerPv,
+  };
+}
+
+export function handlerClick() {
+  return {
+    kind: TraceKindEnum.BEHAVIOR,
+    callback: handlerClick,
+  };
+}
+
+export function handlerRouter() {
+  return {
+    kind: TraceKindEnum.BEHAVIOR,
+    type: TraceTypeEnum.ROUTERCHANGE,
+    callback: handlerRouter,
+  };
 }

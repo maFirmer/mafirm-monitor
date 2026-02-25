@@ -2,9 +2,10 @@ import {
   PaintPageType,
   TraceKindEnum,
   TraceTypeEnum,
+  SendReportData,
 } from "@mafirm-monitor/types";
 // 检测 页面渲染性能 first content paint 首次内容绘制
-export const observeFCP = () => {
+export const observeFCP = (callback: SendReportData) => {
   const observer = new PerformanceObserver((list) => {
     list.getEntries().forEach((entry) => {
       if (entry.name === "first-contentful-paint") {
@@ -20,6 +21,7 @@ export const observeFCP = () => {
         };
         console.log(monitorData);
         // 数据上报
+        callback(monitorData);
       }
     });
   });

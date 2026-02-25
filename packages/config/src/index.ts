@@ -16,4 +16,8 @@ const config: Config = {
   maxReportUploadSize: 10, // 默认上传数据 > 10 条 才会上传服务器
 };
 
-export default config;
+const setConfig = (options: Partial<Config>) => {
+  Object.assign(config, options);
+};
+
+export { config, setConfig };

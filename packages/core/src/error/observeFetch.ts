@@ -1,8 +1,13 @@
-import { TraceKindEnum, TraceTypeEnum } from "@mafirm-monitor/types";
+import {
+  HandlerOptionType,
+  TraceKindEnum,
+  TraceTypeEnum,
+} from "@mafirm-monitor/types";
 
 const orginalFetch = window.fetch;
 
-function overwriteFetch() {
+function overwriteFetch(handlerOption: HandlerOptionType) {
+  const { callback } = handlerOption;
   window.fetch = function (url: any, config?: RequestInit): Promise<Response> {
     const startTime = Date.now();
 
@@ -24,6 +29,8 @@ function overwriteFetch() {
         monitorData.duration = endTime - startTime;
         monitorData.status = res.status;
         monitorData.success = res.ok;
+        callback(monitorData);
+
         return res;
       })
       .catch((err) => {
@@ -32,12 +39,13 @@ function overwriteFetch() {
         monitorData.duration = endTime - startTime;
         monitorData.status = 0;
         monitorData.success = false;
+        callback(monitorData);
+
         throw err;
       });
   };
 }
 
-function fetch() {
-  overwriteFetch();
-}
-export default fetch;
+const handlerFetch = () => overwriteFetch;
+
+export { handlerFetch };

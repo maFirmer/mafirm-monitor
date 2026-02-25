@@ -2,9 +2,10 @@ import {
   PaintPageType,
   TraceKindEnum,
   TraceTypeEnum,
+  SendReportData,
 } from "@mafirm-monitor/types";
 // 检测 页面渲染性能 largest content paint 最大内容绘制
-export const observeLCP = () => {
+export const observeLCP = (callback: SendReportData) => {
   const observer = new PerformanceObserver((list) => {
     if (observer) {
       observer.disconnect();
@@ -20,6 +21,7 @@ export const observeLCP = () => {
       };
       console.log(monitorData);
       // 数据上报
+      callback(monitorData);
     });
   });
 
