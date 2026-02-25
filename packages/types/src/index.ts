@@ -1,6 +1,7 @@
 export * from "./handler";
 export * from "./options";
 
+// 事件基础类型
 export type BaseDataType = {
   kind: string;
   type: string;
