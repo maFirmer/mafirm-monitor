@@ -2,7 +2,6 @@ import { createInstall, errorBoundary } from "./error/index";
 import { setupHandle } from "./setupHandle";
 import { InitOptions, PluginType } from "@mafirm-monitor/types";
 import { setConfig } from "@mafirm-monitor/config";
-import { sendReportData } from "./sendReportData";
 import { subscribeEvent, initHandles } from "./subscribe";
 
 // 初始化sdk配置项

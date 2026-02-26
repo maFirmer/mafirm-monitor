@@ -11,15 +11,15 @@ import {
   addReportCache,
   clearReportCache,
 } from "@mafirm-monitor/utils";
-import { SendReportData } from "@mafirm-monitor/types";
+import { SendReportData, ReportDataType } from "@mafirm-monitor/types";
 
-export const report = (data) => {
+export const report = (data: any) => {
   if (!config.url) {
     console.error("请配置上报地址");
   }
   const monitorData = {
     id: generateUID(),
-    data,
+    ...data,
   };
   // 上传数据
   setReportUpload(monitorData);
@@ -35,7 +35,7 @@ export const sendReportData: SendReportData = (data) => {
   }
 };
 
-const setReportUpload = (data) => {
+const setReportUpload = (data: ReportDataType) => {
   if (config.openImgUpload) {
     imgRequest(data);
   } else {
@@ -56,18 +56,18 @@ const setReportUpload = (data) => {
 };
 
 // 图片上传
-const imgRequest = (data) => {
+const imgRequest = (data: ReportDataType) => {
   const img = new Image();
   img.src = `${config.url}?data=${encodeURIComponent(JSON.stringify(data))}`;
 };
 // sendBeacon 上传
-const sendBeaconRequent = (data) => {
+const sendBeaconRequent = (data: ReportDataType) => {
   navigator.sendBeacon(config.url, JSON.stringify(data));
 };
 // ajax 上传
 const originalOpen = XMLHttpRequest.prototype.open;
 const originalSend = XMLHttpRequest.prototype.send;
-const ajaxRequest = (data) => {
+const ajaxRequest = (data: ReportDataType) => {
   const xhr = new XMLHttpRequest();
   originalOpen.call(xhr, "POST", config.url, true);
   originalSend.call(xhr, JSON.stringify(data));

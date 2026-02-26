@@ -5,7 +5,7 @@ export function getReportCache() {
   return deepClone(reportCache);
 }
 
-export function addReportCache(data) {
+export function addReportCache(data:any) {
   reportCache.push(data);
 }
 

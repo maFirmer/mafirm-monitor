@@ -7,9 +7,14 @@
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
-    "module": "nodenext",
-    "target": "esnext",
-    "types": [],
+    "outDir": "./dist",
+    "module": "commonjs",
+    "target": "es2020",
+    "esModuleInterop": true,
+    "types": ["node"],
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "moduleResolution":"node",
+    "allowSyntheticDefaultImports":true,
     // For nodejs:
     // "lib": ["esnext"],
     // "types": ["node"],

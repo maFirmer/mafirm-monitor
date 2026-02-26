@@ -4,16 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup -c --configPlugin typescript"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-typescript": "^12.3.0",
     "@types/node": "^25.3.0",
+    "rollup": "^4.59.0",
+    "rollup-plugin-uglify": "^6.0.4",
+    "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "tslib": "^2.8.1"
+  }
 }
