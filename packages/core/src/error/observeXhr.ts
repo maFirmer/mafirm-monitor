@@ -62,12 +62,10 @@ function overwriteXhr(handlerOption: HandlerOptionType) {
   };
 }
 
-function handlerXhr() {
+export function handlerXhr() {
   return {
     kind: TraceKindEnum.PERFORMANCE,
     type: TraceTypeEnum.XHR,
-    callback: overwriteXhr,
+    handler: overwriteXhr,
   };
 }
-
-export { handlerXhr };

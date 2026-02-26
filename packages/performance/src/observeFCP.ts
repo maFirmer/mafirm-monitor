@@ -12,7 +12,7 @@ export const observeFCP = (callback: SendReportData) => {
         // 绘制完成 停止监听
         observer.disconnect();
         const entryData = entry.toJSON();
-        const monitorData: PaintPageType = {
+        const monitorData = {
           ...entryData,
           kind: TraceKindEnum.PERFORMANCE,
           type: TraceTypeEnum.FCP,

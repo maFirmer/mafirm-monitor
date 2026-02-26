@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="module">
+      import "../../packages/core/dist/index.js";
+      const { init } = mafirmMonitor;
+      import { test1 } from "./error-test.js";
+      init({
+        url: "http://localhost:3000/api/report",
+      });
+      test1();
+      console.log(index);
+
+      //   console.log(test1);
+    </script>
+  </head>
+  <body>
+    <div>test</div>
+  </body>
+</html>

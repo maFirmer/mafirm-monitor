@@ -91,14 +91,14 @@ export function handlerPv() {
   return {
     kind: TraceKindEnum.BEHAVIOR,
     type: TraceTypeEnum.PV,
-    callback: handlerPv,
+    handler: handlerPv,
   };
 }
 
 export function handlerClick() {
   return {
     kind: TraceKindEnum.BEHAVIOR,
-    callback: handlerClick,
+    handler: handlerClick,
   };
 }
 
@@ -106,6 +106,6 @@ export function handlerRouter() {
   return {
     kind: TraceKindEnum.BEHAVIOR,
     type: TraceTypeEnum.ROUTERCHANGE,
-    callback: handlerRouter,
+    handler: handlerRouter,
   };
 }

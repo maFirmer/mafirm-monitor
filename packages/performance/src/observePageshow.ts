@@ -1,6 +1,6 @@
 import {
-  TraceTypeEnum,
   TraceKindEnum,
+  TraceTypeEnum,
   SendReportData,
 } from "@mafirm-monitor/types";
 export const observePageshow = (callback: SendReportData) => {
@@ -9,9 +9,10 @@ export const observePageshow = (callback: SendReportData) => {
     (event) => {
       requestAnimationFrame(() => {
         ["load", "DOMContentLoaded"].forEach((type) => {
+          const traceTypeKey = type.toUpperCase() as keyof typeof TraceTypeEnum;
           const monitorData = {
             kind: TraceKindEnum.PERFORMANCE,
-            type: type,
+            type: TraceTypeEnum[traceTypeKey],
             pageUrl: window.location.href,
             timestamp: new Date().getTime(),
             startTime: performance.now() - event.timeStamp,

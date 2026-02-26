@@ -16,6 +16,39 @@ export type PaintPageType = BaseDataType & {
   pageUrl: string;
 };
 
+/* eslint-disable no-unused-vars */
+export enum TraceKindEnum {
+  PERFORMANCE = "performance",
+  exception = "exception",
+  ERROR = "error",
+  BEHAVIOR = "behavior",
+}
+
+export enum ExtentionType {}
+
+/* eslint-disable no-unused-vars */
+export enum TraceTypeEnum {
+  FETCH = "fetch",
+  LOAD = "load",
+  XHR = "xhr",
+  STUTTER = "stutter",
+  WHITESCREEN = "whiteScreen",
+  JS = "js",
+  CORE = "cors",
+  RESOURCE = "resource",
+  PROMISE = "promise",
+  REACT = "react",
+  VUE = "vue",
+  ROUTERCHANGE = "routerChange",
+  PV = "pv",
+  FCP = "fcp",
+  FP = "fp",
+  LCP = "lcp",
+  FMP = "fmp",
+  TRACKER = "tracker",
+  DOMCONTENTLOADED = "DOMContentLoaded",
+}
+
 export type PerformanceResourceType = BaseDataType & {
   /** 资源的名称或 URL */
   name: string;
@@ -46,37 +79,6 @@ export type PerformanceResourceType = BaseDataType & {
   /** 页面路径" */
   pageUrl: string;
 };
-
-/* eslint-disable no-unused-vars */
-export enum TraceKindEnum {
-  PERFORMANCE = "performance",
-  exception = "exception",
-  ERROR = "error",
-  BEHAVIOR = "behavior",
-}
-
-/* eslint-disable no-unused-vars */
-export enum TraceTypeEnum {
-  FETCH = "fetch",
-  LOAD = "load",
-  XHR = "xhr",
-  STUTTER = "stutter",
-  WHITESCREEN = "whiteScreen",
-  JS = "js",
-  CORE = "cors",
-  RESOURCE = "resource",
-  PROMISE = "promise",
-  REACT = "react",
-  VUE = "vue",
-  ROUTERCHANGE = "routerChange",
-  PV = "pv",
-  FCP = "fcp",
-  FP = "fp",
-  LCP = "lcp",
-  FMP = "fmp",
-  TRACKER = "tracker",
-}
-
 /**
  * 网页的几种加载方式
  */

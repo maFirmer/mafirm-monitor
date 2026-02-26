@@ -12,7 +12,7 @@ export const observeLCP = (callback: SendReportData) => {
     }
     list.getEntries().forEach((entry) => {
       const entryData = entry.toJSON();
-      const monitorData: PaintPageType = {
+      const monitorData = {
         ...entryData,
         kind: TraceKindEnum.PERFORMANCE,
         type: TraceTypeEnum.LCP,

@@ -46,6 +46,10 @@ function overwriteFetch(handlerOption: HandlerOptionType) {
   };
 }
 
-const handlerFetch = () => overwriteFetch;
-
-export { handlerFetch };
+export function handlerFetch() {
+  return {
+    kind: TraceKindEnum.PERFORMANCE,
+    type: TraceTypeEnum.FETCH,
+    handler: overwriteFetch,
+  };
+}

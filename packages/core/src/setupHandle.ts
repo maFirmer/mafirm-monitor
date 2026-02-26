@@ -12,40 +12,40 @@ import { sendReportData } from "./sendReportData";
 // 初始化js错误集合 、用户行为集合
 // const baseHandles =
 export function setupHandle() {
-  return new Promise((resolve) => {
-    // xhr
-    subscribeEvent({
-      kind: TraceKindEnum.PERFORMANCE,
-      handler: () => handlerXhr(),
-    });
-    // fetch
-    subscribeEvent({
-      kind: TraceKindEnum.PERFORMANCE,
-      handler: () => handlerFetch(),
-    });
-    // js运行错误
-    subscribeEvent({
-      kind: TraceKindEnum.ERROR,
-      handler: () => handlerJsError(),
-    });
-    // promise错误
-    subscribeEvent({
-      kind: TraceKindEnum.ERROR,
-      handler: () => handlerUnhandledrejection(),
-    });
-    // 用户行为
-    subscribeEvent({
-      kind: TraceKindEnum.BEHAVIOR,
-      handler: () => handlerPv(),
-    });
+  console.log("初始化事件绑定");
 
-    subscribeEvent({
-      kind: TraceKindEnum.BEHAVIOR,
-      handler: () => handlerClick(),
-    });
-    subscribeEvent({
-      kind: TraceKindEnum.BEHAVIOR,
-      handler: () => handlerRouter(),
-    });
+  // xhr
+  subscribeEvent({
+    kind: TraceKindEnum.PERFORMANCE,
+    handler: () => handlerXhr(),
+  });
+  // fetch
+  subscribeEvent({
+    kind: TraceKindEnum.PERFORMANCE,
+    handler: () => handlerFetch(),
+  });
+  // js运行错误
+  subscribeEvent({
+    kind: TraceKindEnum.ERROR,
+    handler: () => handlerJsError(),
+  });
+  // promise错误
+  subscribeEvent({
+    kind: TraceKindEnum.ERROR,
+    handler: () => handlerUnhandledrejection(),
+  });
+  // 用户行为
+  subscribeEvent({
+    kind: TraceKindEnum.BEHAVIOR,
+    handler: () => handlerPv(),
+  });
+
+  subscribeEvent({
+    kind: TraceKindEnum.BEHAVIOR,
+    handler: () => handlerClick(),
+  });
+  subscribeEvent({
+    kind: TraceKindEnum.BEHAVIOR,
+    handler: () => handlerRouter(), // {kind type handler:funtion }
   });
 }

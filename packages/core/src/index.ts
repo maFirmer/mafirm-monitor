@@ -6,6 +6,7 @@ import { subscribeEvent, initHandles } from "./subscribe";
 
 // 初始化sdk配置项
 export async function init(options: InitOptions) {
+  console.log("初始化监控配置");
   if (!options.url) {
     return console.error("请配置上报地址: url");
   }
@@ -19,7 +20,7 @@ export async function init(options: InitOptions) {
     console.log(`初始化监控函数错误setupHandle ：${error}`);
   }
   // 订阅完所有的事件，初始化
-  setTimeout(initHandles, 0);
+  initHandles();
 }
 
 // vue插件注册

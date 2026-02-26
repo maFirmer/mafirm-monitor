@@ -11,20 +11,24 @@ export function subscribeEvent(plugin: PluginType) {
     );
   }
   handles[kind] = handles[kind] || [];
-  handles[kind].push({ kind, type, handler: handler() });
+  handles[kind].push(handler());
 }
 
 export function notify(kind: string, data?: any) {
   if (!handles[kind] || !kind) return;
-  handles[kind].forEach((handle) => handle.handler(data));
+  handles[kind].forEach((handle) => {
+    const handler = handle.handler();
+    handler?.callback(data);
+  });
 }
 
 export function initHandles() {
+  console.log("初始化事件函数");
   if (!handles) return;
   const keys = Object.keys(handles);
   keys.forEach((key) => {
-    handles[key]!.forEach((handle) =>
-      handle.handler({ callback: sendReportData }),
-    );
+    handles[key]!.forEach((handle) => {
+      handle.handler({ callback: sendReportData });
+    });
   });
 }

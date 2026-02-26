@@ -7,6 +7,8 @@ import {
 const jsError = (handlerOption: HandlerOptionType) => {
   const { callback } = handlerOption;
   window.onerror = (message, source, line, column, error) => {
+    console.log(`js加载错误, error:${error}`);
+
     const monitorData = {
       kind: TraceKindEnum.ERROR,
       type: TraceTypeEnum.JS,
@@ -27,6 +29,8 @@ const jsError = (handlerOption: HandlerOptionType) => {
 const unhandledrejection = (handlerOption: HandlerOptionType) => {
   const { callback } = handlerOption;
   window.addEventListener("unhandledrejection", (event) => {
+    console.log(`promise加载错误,event:${event} `);
+
     const monitorData = {
       kind: TraceKindEnum.ERROR,
       type: TraceTypeEnum.PROMISE,

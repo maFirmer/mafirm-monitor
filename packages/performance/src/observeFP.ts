@@ -12,7 +12,7 @@ export const observeFP = (callback: SendReportData) => {
         observer.disconnect();
 
         const entryData = entry.toJSON();
-        const monitorData: PaintPageType = {
+        const monitorData = {
           ...entryData,
           kind: TraceKindEnum.PERFORMANCE,
           type: TraceTypeEnum.FP,

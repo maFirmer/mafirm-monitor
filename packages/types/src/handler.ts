@@ -1,10 +1,10 @@
-import { TraceKindEnum, TraceTypeEnum } from "./index";
+import { TraceKindEnum, TraceTypeEnum, ExtentionType } from "./index";
 // 上报数据类型
 export type SendReportData = (data: ReportDataType) => void;
 
 export interface ReportDataType {
-  kind: keyof TraceKindEnum;
-  type: keyof typeof TraceTypeEnum;
+  kind: TraceKindEnum;
+  type: TraceTypeEnum;
   [key: string]: any;
 }
 // 事件类型
