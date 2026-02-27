@@ -6,6 +6,7 @@ import {
 } from "@mafirm-monitor/types";
 // 检测 页面渲染性能 largest content paint 最大内容绘制
 export const observeLCP = (callback: SendReportData) => {
+  console.log("largest content paint");
   const observer = new PerformanceObserver((list) => {
     if (observer) {
       observer.disconnect();
@@ -19,7 +20,6 @@ export const observeLCP = (callback: SendReportData) => {
         timestamp: new Date().getTime(),
         pageUrl: window.location.href,
       };
-      console.log(monitorData);
       // 数据上报
       callback(monitorData);
     });

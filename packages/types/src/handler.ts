@@ -3,12 +3,15 @@ import { TraceKindEnum, TraceTypeEnum, ExtentionType } from "./index";
 export type SendReportData = (data: ReportDataType) => void;
 
 export interface ReportDataType {
-  kind: TraceKindEnum;
-  type: TraceTypeEnum;
+  kind?: TraceKindEnum;
+  type?: TraceTypeEnum;
+  data?: any[];
   [key: string]: any;
 }
 // 事件类型
 // 插件类型
+export type CreatePlugin = () => PluginType;
+
 export interface PluginType {
   handler: Function;
   kind: TraceKindEnum;
@@ -18,4 +21,5 @@ export interface PluginType {
 // 事件回调
 export type HandlerOptionType = {
   callback: (data: any) => void;
+  options?: any;
 };

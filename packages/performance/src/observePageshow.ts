@@ -4,6 +4,7 @@ import {
   SendReportData,
 } from "@mafirm-monitor/types";
 export const observePageshow = (callback: SendReportData) => {
+  console.log("页面加载相关");
   window.addEventListener(
     "pageshow",
     (event) => {
@@ -15,7 +16,7 @@ export const observePageshow = (callback: SendReportData) => {
             type: TraceTypeEnum[traceTypeKey],
             pageUrl: window.location.href,
             timestamp: new Date().getTime(),
-            startTime: performance.now() - event.timeStamp,
+            startTime: Date.now() - event.timeStamp,
           };
           // 上报数据
           callback(monitorData);

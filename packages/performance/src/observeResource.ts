@@ -18,6 +18,7 @@ export const observeResource = (callback: SendReportData) => {
   }
 };
 export const handler = (callback: SendReportData) => {
+  console.log("页面加载完成触发监控");
   const observer = new PerformanceObserver((list) => {
     const dataList: PerformanceResourceType[] = [];
     const entries = list.getEntries();

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="module">
+      import "../../../packages/core/dist/index.js";
+      import "../../../packages/performance/dist/index.js";
+      const { init, use } = core;
+      const { createPerformance } = performance;
+
+      use(createPerformance());
+      init({
+        url: "http://localhost:3000/sendReportData",
+        maxReportUploadSize: 2,
+        // openImgUpload: true,
+      });
+      //   console.log(test1);
+
+      import { test1 } from "./error-test.js";
+
+      function p1() {
+        return Promise.reject(Error("p1 error"));
+      }
+      function p2() {
+        return Promise.reject(Error("p2 error"));
+      }
+      function p3() {
+        return Promise.reject(Error("p3 error"));
+      }
+      function p4() {
+        return Promise.reject(Error("p4 error"));
+      }
+      function p5() {
+        return Promise.reject(Error("p5 error"));
+      }
+      function p6() {
+        return Promise.reject(Error("p6 error"));
+      }
+      test1();
+      p1();
+      p2();
+      p3();
+      p4();
+      p5();
+      p6();
+    </script>
+  </head>
+  <body>
+    <div>test</div>
+    <div>
+      <!-- <img src="http://dddfd.com/adasd.png" alt="" />
+      <img src="http://fffgghhh.com/bdda.png" alt="" />
+      <img src="http://gghddg.com/ccccg.png" alt="" />
+      <img src="http://dddfd.com/adasd.png" alt="" /> -->
+    </div>
+  </body>
+</html>

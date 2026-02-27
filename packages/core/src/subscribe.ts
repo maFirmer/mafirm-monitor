@@ -23,7 +23,6 @@ export function notify(kind: string, data?: any) {
 }
 
 export function initHandles() {
-  console.log("初始化事件函数");
   if (!handles) return;
   const keys = Object.keys(handles);
   keys.forEach((key) => {

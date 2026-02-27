@@ -19,7 +19,7 @@ export const report = (data: any) => {
   }
   const monitorData = {
     id: generateUID(),
-    ...data,
+    data,
   };
   // 上传数据
   setReportUpload(monitorData);
@@ -27,7 +27,8 @@ export const report = (data: any) => {
 
 export const sendReportData: SendReportData = (data) => {
   addReportCache(data);
-  const reportCache = getReportCache();
+  const reportCache = getReportCache(); // []
+  console.log(reportCache);
   const maxReportUploadSize = config.maxReportUploadSize;
   if (reportCache.length && reportCache.length > maxReportUploadSize) {
     report(reportCache);
@@ -45,29 +46,33 @@ const setReportUpload = (data: ReportDataType) => {
         () => {
           request(data);
         },
-        { timeout: 3000 },
+        { timeout: 10 * 1000 },
       );
     } else {
       setTimeout(() => {
         request(data);
-      }, 500);
+      }, 0);
     }
   }
 };
 
 // 图片上传
 const imgRequest = (data: ReportDataType) => {
+  console.log("图片上传");
   const img = new Image();
   img.src = `${config.url}?data=${encodeURIComponent(JSON.stringify(data))}`;
 };
 // sendBeacon 上传
 const sendBeaconRequent = (data: ReportDataType) => {
+  console.log("sendBeacon上传");
+
   navigator.sendBeacon(config.url, JSON.stringify(data));
 };
 // ajax 上传
 const originalOpen = XMLHttpRequest.prototype.open;
 const originalSend = XMLHttpRequest.prototype.send;
 const ajaxRequest = (data: ReportDataType) => {
+  console.log("ajax上传");
   const xhr = new XMLHttpRequest();
   originalOpen.call(xhr, "POST", config.url, true);
   originalSend.call(xhr, JSON.stringify(data));

@@ -6,8 +6,44 @@ import {
 
 const jsError = (handlerOption: HandlerOptionType) => {
   const { callback } = handlerOption;
+  // js 资源加载错误 src href
+  window.addEventListener(
+    "error",
+    (event) => {
+      console.log(`js加载错误,jsResourceError`);
+      const target = event.target;
+      if (!target) return;
+
+      if (
+        ((target instanceof HTMLScriptElement ||
+          target instanceof HTMLImageElement) &&
+          target.src) ||
+        (target instanceof HTMLLinkElement && target.href)
+      ) {
+        const url =
+          target instanceof HTMLScriptElement ||
+          target instanceof HTMLImageElement
+            ? target.src
+            : target.href;
+
+        const monitorData = {
+          kind: TraceKindEnum.ERROR,
+          type: TraceTypeEnum.RESOURCE,
+          url,
+          html: target.outerHTML,
+          pageUrl: window.location.href,
+          // path: event.composedPath(),
+        };
+        console.log(monitorData);
+        callback(monitorData);
+      }
+    },
+    true,
+  );
+
+  // js运行错误
   window.onerror = (message, source, line, column, error) => {
-    console.log(`js加载错误, error:${error}`);
+    console.log(`js加载错误,jsError`);
 
     const monitorData = {
       kind: TraceKindEnum.ERROR,
@@ -19,17 +55,16 @@ const jsError = (handlerOption: HandlerOptionType) => {
       error,
       stack: error?.stack,
       pageUrl: window.location.href,
-      startTime: performance.now(),
+      startTime: Date.now(),
     };
     callback(monitorData);
-    console.log(message, source, line, column, error);
   };
 };
 // promise错误
 const unhandledrejection = (handlerOption: HandlerOptionType) => {
   const { callback } = handlerOption;
   window.addEventListener("unhandledrejection", (event) => {
-    console.log(`promise加载错误,event:${event} `);
+    console.log(`promise加载错误,unhandledrejection `);
 
     const monitorData = {
       kind: TraceKindEnum.ERROR,
@@ -38,7 +73,6 @@ const unhandledrejection = (handlerOption: HandlerOptionType) => {
       pageUrl: window.location.href,
       startTime: event.timeStamp,
     };
-    console.log(event.reason);
     callback(monitorData);
   });
 };

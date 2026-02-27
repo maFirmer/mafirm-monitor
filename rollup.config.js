@@ -20,7 +20,7 @@ const outputConfig = (pkgPath) => {
       output: [
         {
           format: "umd",
-          name: "mafirmMonitor",
+          name: pkgPath,
           sourcemap: true,
           file: `./packages/${pkgPath}/dist/index.js`,
         },
@@ -34,13 +34,13 @@ const outputConfig = (pkgPath) => {
           sourcemap: true,
           file: `./packages/${pkgPath}/dist/index.cjs.js`,
         },
-        {
-          format: "umd",
-          name: "mafirmMonitor",
-          sourcemap: true,
-          file: `./packages/${pkgPath}/dist/index.min.js`,
-          plugins: [uglify()],
-        },
+        // {
+        //   format: "umd",
+        //   name: pkgPath,
+        //   sourcemap: true,
+        //   file: `./packages/${pkgPath}/dist/index.min.js`,
+        //   plugins: [uglify()],
+        // },
       ],
       plugins: [
         typescript({
@@ -57,7 +57,7 @@ const outputConfig = (pkgPath) => {
         { file: `./packages/${pkgPath}/dist/index.cjs.d.ts`, format: "cjs" },
         { file: `./packages/${pkgPath}/dist/index.esm.d.ts`, format: "esm" },
         { file: `./packages/${pkgPath}/dist/index.d.ts`, format: "umd" },
-        { file: `./packages/${pkgPath}/dist/index.min.d.ts`, format: "umd" },
+        // { file: `./packages/${pkgPath}/dist/index.min.d.ts`, format: "umd" },
       ],
       plugins: [dts()],
     },

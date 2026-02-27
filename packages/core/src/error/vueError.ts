@@ -14,7 +14,7 @@ export function createInstall(callback: (options: InitOptions) => void) {
         message: err.message,
         stack: err.stack,
         pageUrl: window.location.href,
-        startTime: performance.now(),
+        startTime: Date.now(),
       };
       // 数据上报
       vueErrorHandler.call(this, err, instance, info);

@@ -1,6 +1,6 @@
 import { createInstall, errorBoundary } from "./error/index";
 import { setupHandle } from "./setupHandle";
-import { InitOptions, PluginType } from "@mafirm-monitor/types";
+import { InitOptions, PluginType, CreatePlugin } from "@mafirm-monitor/types";
 import { setConfig } from "@mafirm-monitor/config";
 import { subscribeEvent, initHandles } from "./subscribe";
 
@@ -15,7 +15,7 @@ export async function init(options: InitOptions) {
 
   try {
     // 初始化错误监控函数
-    await setupHandle();
+    setupHandle();
   } catch (error) {
     console.log(`初始化监控函数错误setupHandle ：${error}`);
   }
@@ -25,10 +25,16 @@ export async function init(options: InitOptions) {
 
 // vue插件注册
 const install = createInstall((options: InitOptions) => init(options));
+
 export function use(plugin: PluginType, options?: InitOptions) {
+  console.log(`绑定插件； ${plugin.kind}`);
   if (!plugin.kind) return console.error("请配置插件类型");
   // 绑定事件到handles中
-  subscribeEvent(plugin);
+  subscribeEvent({
+    kind: plugin.kind,
+    type: plugin?.type,
+    handler: () => plugin.handler(),
+  });
 }
 
 export default {
