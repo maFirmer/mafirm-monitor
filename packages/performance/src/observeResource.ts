@@ -12,9 +12,9 @@ export const observeResource = (callback: SendReportData) => {
   } else {
     const onload = () => {
       handler(callback);
-      window.addEventListener("load", onload, true);
+      window.removeEventListener("load", onload, true);
     };
-    window.removeEventListener("load", onload, true);
+    window.addEventListener("load", onload, true);
   }
 };
 export const handler = (callback: SendReportData) => {
