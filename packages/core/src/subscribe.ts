@@ -1,5 +1,6 @@
 import { PluginType } from "@mafirm-monitor/types";
 import { sendReportData } from "./sendReportData";
+import { config } from "@mafirm-monitor/config";
 
 const handles: { [key in string]: PluginType[] } = {};
 
@@ -27,7 +28,7 @@ export function initHandles() {
   const keys = Object.keys(handles);
   keys.forEach((key) => {
     handles[key]!.forEach((handle) => {
-      handle.handler({ callback: sendReportData });
+      handle.handler({ callback: sendReportData, options: config });
     });
   });
 }

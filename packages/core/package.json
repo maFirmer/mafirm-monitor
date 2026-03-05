@@ -12,6 +12,10 @@
   "dependencies": {
     "@mafirm-monitor/config": "workspace:^",
     "@mafirm-monitor/types": "workspace:^",
-    "@mafirm-monitor/utils": "workspace:^"
+    "@mafirm-monitor/utils": "workspace:^",
+    "error-stack-parser": "2.1.4"
+  },
+  "resolutions": {
+    "error-stack-parser": "2.1.4"
   }
 }

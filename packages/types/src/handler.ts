@@ -23,3 +23,8 @@ export type HandlerOptionType = {
   callback: (data: any) => void;
   options?: any;
 };
+
+//
+export type EventHandleType = HandlerOptionType & {
+  eventType: typeof TraceTypeEnum;
+};

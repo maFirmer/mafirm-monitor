@@ -24,16 +24,16 @@ const outputConfig = (pkgPath) => {
           sourcemap: true,
           file: `./packages/${pkgPath}/dist/index.js`,
         },
-        {
-          format: "es",
-          sourcemap: true,
-          file: `./packages/${pkgPath}/dist/index.esm.js`,
-        },
-        {
-          format: "cjs",
-          sourcemap: true,
-          file: `./packages/${pkgPath}/dist/index.cjs.js`,
-        },
+        // {
+        //   format: "es",
+        //   sourcemap: true,
+        //   file: `./packages/${pkgPath}/dist/index.esm.js`,
+        // },
+        // {
+        //   format: "cjs",
+        //   sourcemap: true,
+        //   file: `./packages/${pkgPath}/dist/index.cjs.js`,
+        // },
         // {
         //   format: "umd",
         //   name: pkgPath,
@@ -51,16 +51,16 @@ const outputConfig = (pkgPath) => {
         json(),
       ],
     },
-    {
-      input: `./packages/${pkgPath}/src/index.ts`,
-      output: [
-        { file: `./packages/${pkgPath}/dist/index.cjs.d.ts`, format: "cjs" },
-        { file: `./packages/${pkgPath}/dist/index.esm.d.ts`, format: "esm" },
-        { file: `./packages/${pkgPath}/dist/index.d.ts`, format: "umd" },
-        // { file: `./packages/${pkgPath}/dist/index.min.d.ts`, format: "umd" },
-      ],
-      plugins: [dts()],
-    },
+    // {
+    //   input: `./packages/${pkgPath}/src/index.ts`,
+    //   output: [
+    //     { file: `./packages/${pkgPath}/dist/index.cjs.d.ts`, format: "cjs" },
+    //     { file: `./packages/${pkgPath}/dist/index.esm.d.ts`, format: "esm" },
+    //     { file: `./packages/${pkgPath}/dist/index.d.ts`, format: "umd" },
+    //     // { file: `./packages/${pkgPath}/dist/index.min.d.ts`, format: "umd" },
+    //   ],
+    //   plugins: [dts()],
+    // },
   ];
 };
 

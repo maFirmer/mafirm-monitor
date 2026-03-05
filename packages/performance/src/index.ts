@@ -7,7 +7,8 @@ import { TraceKindEnum, HandlerOptionType } from "@mafirm-monitor/types";
 
 const performance = (handlerOption: HandlerOptionType) => {
   const { callback, options } = handlerOption;
-
+  if (!options?.openPerformance)
+    return console.info("性能监控未开启,请查看init中openPerformance不为false");
   [observeFCP, observeResource, observePageshow, observeLCP, observeFP].forEach(
     (handle) => {
       console.log("performance 插件安装成功");

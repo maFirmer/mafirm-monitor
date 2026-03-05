@@ -28,7 +28,7 @@ const install = createInstall((options: InitOptions) => init(options));
 
 export function use(plugin: PluginType, options?: InitOptions) {
   console.log(`绑定插件； ${plugin.kind}`);
-  if (!plugin.kind) return console.error("请配置插件类型");
+  if (!plugin.kind) return console.error("请配置插件类型:{kind: xxx,}");
   // 绑定事件到handles中
   subscribeEvent({
     kind: plugin.kind,

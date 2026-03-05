@@ -22,6 +22,7 @@ export enum TraceKindEnum {
   exception = "exception",
   ERROR = "error",
   BEHAVIOR = "behavior",
+  RECORD = "record",
 }
 
 export enum ExtentionType {}
@@ -47,6 +48,7 @@ export enum TraceTypeEnum {
   FMP = "fmp",
   TRACKER = "tracker",
   DOMCONTENTLOADED = "DOMContentLoaded",
+  CLICK = "click",
 }
 
 export type PerformanceResourceType = BaseDataType & {

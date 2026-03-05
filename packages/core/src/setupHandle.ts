@@ -1,9 +1,4 @@
-import {
-  handlerXhr,
-  handlerFetch,
-  handlerJsError,
-  handlerUnhandledrejection,
-} from "./error/index";
+import { handlerXhr, handlerFetch, handlerJsError } from "./error/index";
 import { handlerPv, handlerClick, handlerRouter } from "./behavior/index";
 import { subscribeEvent, initHandles } from "./subscribe";
 import { TraceKindEnum, TraceTypeEnum } from "@mafirm-monitor/types";
@@ -30,10 +25,10 @@ export function setupHandle() {
     handler: () => handlerJsError(),
   });
   // promise错误
-  subscribeEvent({
-    kind: TraceKindEnum.ERROR,
-    handler: () => handlerUnhandledrejection(),
-  });
+  // subscribeEvent({
+  //   kind: TraceKindEnum.ERROR,
+  //   handler: () => handlerUnhandledrejection(),
+  // });
   // 用户行为
   subscribeEvent({
     kind: TraceKindEnum.BEHAVIOR,

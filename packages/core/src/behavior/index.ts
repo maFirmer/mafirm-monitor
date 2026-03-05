@@ -5,11 +5,13 @@ import {
   TraceTypeEnum,
 } from "@mafirm-monitor/types";
 export function pv(handlerOption: HandlerOptionType) {
-  const { callback } = handlerOption;
+  const { callback, options } = handlerOption;
+  if (!options?.openError)
+    return console.info("用户行为监控未开启,请查看init中openBehavior不为false");
   const monitorData = {
     kind: TraceKindEnum.BEHAVIOR,
     type: TraceTypeEnum.PV,
-    startTime: performance.now(),
+    startTime: Date.now(),
     pageUrl: window.location.href,
     refferer: document.referrer,
     uuid: generateUID(),
@@ -17,32 +19,40 @@ export function pv(handlerOption: HandlerOptionType) {
   callback(monitorData);
 }
 export function click(handlerOption: HandlerOptionType) {
-  const { callback } = handlerOption;
+  const { callback, options } = handlerOption;
+  if (!options?.openError)
+    return console.info("用户行为监控未开启,请查看init中openBehavior不为false");
   ["mousedown", "touchStart"].forEach((eventType) => {
-    window.addEventListener(eventType, function (e: Event) {
-      const target = e.target;
-      const element = target as HTMLElement;
-      // 用户点击之后统计
-      if (element.tagName) {
-        const monitorData = {
-          kind: TraceKindEnum.BEHAVIOR,
-          type: eventType,
-          eventType,
-          startTime: e.timeStamp,
-          target: element.tagName,
-          innerHTML: element.innerHTML,
-          outerHtml: element.outerHTML,
-          width: element.offsetWidth,
-          height: element.offsetHeight,
-          path: e.composedPath(),
-        };
-        callback(monitorData);
-      }
-    });
+    window.addEventListener(
+      eventType,
+      function (e: Event) {
+        const target = e.target;
+        const element = target as HTMLElement;
+        // 用户点击之后统计
+        if (element.tagName) {
+          const monitorData = {
+            kind: TraceKindEnum.BEHAVIOR,
+            type: TraceTypeEnum.CLICK,
+            eventType,
+            startTime: e.timeStamp,
+            target: element.tagName,
+            innerHTML: element.innerHTML,
+            outerHtml: element.outerHTML,
+            width: element.offsetWidth,
+            height: element.offsetHeight,
+            // path: e.composedPath(),
+          };
+          callback(monitorData);
+        }
+      },
+      true,
+    );
   });
 }
-export function routerChange(handlerOptionvv: HandlerOptionType) {
-  const { callback } = handlerOptionvv;
+export function routerChange(handlerOption: HandlerOptionType) {
+  const { callback, options } = handlerOption;
+  if (!options?.openError)
+    return console.info("用户行为监控未开启,请查看init中openBehavior不为false");
   let oldUrl = ""; // hash
   let from = ""; // history
 
@@ -54,7 +64,7 @@ export function routerChange(handlerOptionvv: HandlerOptionType) {
       const monitorData = {
         kind: TraceKindEnum.BEHAVIOR,
         type: TraceTypeEnum.ROUTERCHANGE,
-        startTime: performance.now(),
+        startTime: Date.now(),
         pageUrl: newUrl,
         refferer: oldUrl,
         uuid: generateUID(),
@@ -73,7 +83,7 @@ export function routerChange(handlerOptionvv: HandlerOptionType) {
       const monitorData = {
         kind: TraceKindEnum.BEHAVIOR,
         type: TraceTypeEnum.ROUTERCHANGE,
-        startTime: performance.now(),
+        startTime: Date.now(),
         from: from,
         to: to,
         refferer: oldUrl,
@@ -91,14 +101,14 @@ export function handlerPv() {
   return {
     kind: TraceKindEnum.BEHAVIOR,
     type: TraceTypeEnum.PV,
-    handler: handlerPv,
+    handler: pv,
   };
 }
 
 export function handlerClick() {
   return {
     kind: TraceKindEnum.BEHAVIOR,
-    handler: handlerClick,
+    handler: click,
   };
 }
 
@@ -106,6 +116,6 @@ export function handlerRouter() {
   return {
     kind: TraceKindEnum.BEHAVIOR,
     type: TraceTypeEnum.ROUTERCHANGE,
-    handler: handlerRouter,
+    handler: routerChange,
   };
 }
